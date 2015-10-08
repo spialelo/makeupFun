@@ -25,6 +25,14 @@
             clear: both;
         }
 
+        #feedbackMakeup{
+            float: left;
+            clear: both;
+            width: 300px;
+            height: 50px;
+            border: 1px dashed #000;
+            margin-bottom: 10px;
+        }
 
         #displayBag{
             float: left;
@@ -37,7 +45,15 @@
             padding: 15px;
         }
 
-        #makeupButton{
+        #addMakeupButton{
+            float: left;
+            clear: both;
+            margin-top: 15px;
+            margin-bottom: 10px;
+
+        }
+
+        #showMakeupButton{
             float: left;
             clear: both;
             margin-top: 15px;
@@ -71,8 +87,17 @@
  <label>Type:</label> <input type="text" value="" id="mkType" placeholder="Type"/><br>
   <label>Expiration Date:</label> <input type="text" value="" id="mkExpDate" placeholder="Expiration Date"/>
 
-        <button id="makeupButton" type="button" value="Submit">Submit</button>
+        <button id="addMakeupButton" type="button" value="Add Makeup">Add Makeup</button>
+        <br>
+        <button id="showMakeupButton" type="button" value="Show Makeup">Show Makeup</button>
+
     </section>
+
+        <aside>
+            <div id="feedbackMakeup"></div>
+
+        </aside>
+
 
     <section style="margin-top: 20px;">
        <div id="displayBag">
