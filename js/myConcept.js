@@ -16,9 +16,6 @@
         this.mkname = mkname;
         this.mktype = mktype;
         this.expDate = expDate;
-        this.makeupToString = function(){
-          return "You have "+this.brand + " "+this.mkname+ " in your makeup bag. It has an expiration date of "+this.expDate+". It is a "+this.mktype+".";
-        };
     }
     /* end of General makeup object */
 
@@ -26,33 +23,31 @@
     /* Adding things to the bag */
     function addToBag(){
 
-        var inputBrand = document.getElementById('mkBrand').value;
-        var inputName = document.getElementById('mkName').value;
-        var inputType = document.getElementById('mkType').value;
-        var inputExpDate = document.getElementById('mkExpDate').value;
+        var inputBrand = document.getElementById("mkBrand").value;
+        var inputName = document.getElementById("mkName").value;
+        var inputType = document.getElementById("mkType").value;
+        var inputExpDate = document.getElementById("mkExpDate").value;
 
 
         if(inputBrand != "" && inputName != "" && inputType != "" && inputExpDate != "") {
 
             var product_1 = new Makeup(inputBrand,inputName,inputType,inputExpDate);
             makeupBag.push(product_1);
-            document.getElementById('feedbackMakeup').textContent = makeupBag.length + " item(s) in your makeup bag.";
+            document.getElementById("feedbackMakeup").textContent = makeupBag.length + " item(s) in your makeup bag.";
 
-        /*console.log(product_1.brand + ", " + product_1.name);
-        document.getElementById('displayBag').textContent = product_1.makeupToString();*/
 
         }
 
         else if(inputBrand == "" || inputName == "" || inputType == "" || inputExpDate == ""){
 
-            document.getElementById('displayBag').textContent = "Add something to your make up bag. :)";
+            document.getElementById("displayBag").textContent = "Add something to your make up bag. :)";
 
         }
 
-        document.getElementById('mkBrand').value = "";
-        document.getElementById('mkName').value = "";
-        document.getElementById('mkType').value = "";
-        document.getElementById('mkExpDate').value = "";
+        document.getElementById("mkBrand").value = "";
+        document.getElementById("mkName").value = "";
+        document.getElementById("mkType").value = "";
+        document.getElementById("mkExpDate").value = "";
 
     }
     /* end of Adding things to the bag */
@@ -61,72 +56,96 @@
     /* display what is in the bag */
     function showBag (){
       for(var i = 0; i < makeupBag.length; i++){
-          document.getElementById('displayBag').innerHTML += makeupBag[i].brand + " " +makeupBag[i].mkname +"<br>";
+          document.getElementById("displayBag").innerHTML += makeupBag[i].brand + " " +makeupBag[i].mkname +"<br>";
       }
     }
     /* end of display what is in the bag */
 
 
     /* search the bag/array of objects */
-    function search(){
-        this.searchByBrand = function(arguments){
-              for(var i = 0; i < makeupBag.length; i++){
-
-                if (arguments == makeupBag[i].brand){
-                    document.getElementById('displayBag').innerHTML += makeupBag[i] +"<br>";
-                }
-
-          
-      
-      }
-        };
-        this.searchByName = function(){};
+    function search(searchMatch){
+         this.searchMatch = searchMatch;
+        /*this.searchByName = function(){};
         this.searchByMkType = function(){};
-        this.searchByExpDate = function(){};
+        this.searchByExpDate = function(){};*/
     }
     /* search the bag/array of objects */
 
+    /*search.prototype.searchByBrand = function(searchMatch){
 
-    function searchTheBag(){
+            var searchResults = " ";
 
-        var dropDown = document.getElementsByTagName("option");
+              for(var j = 0; j < makeupBag.length; j++){
 
-        for (var i=0; i<dropDown.length; i++){
-
-                var selectedOption = dropDown[i].getAttribute("selected").text;
-
-                if(selectedOption == "makeBrand"){
-                return search.searchByBrand();
+                if (this.searchMatch == makeupBag[j].brand){
+                    searchResults += makeupBag[j] +"<br>"
                 }
 
-                else if (selectedOption == "makeName"){
-                return search.searchByName();
+      }
+            document.getElementById("displayBag").innerHTML = searchResults;
+            console.log(searchResults);
+        };*/
+
+
+    function searchByBrand (searchMatch){
+            this.searchMatch = searchMatch;
+            var searchResults = " ";
+
+              for(var j = 0; j < makeupBag.length; j++){
+
+                if (this.searchMatch == makeupBag[j].brand){
+                    searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
                 }
 
-                else if(selectedOption == "makeType"){
-                    return search.searchByMkType();
-                }
+      }
+            document.getElementById("displayBag").innerHTML = searchResults;
+            console.log(searchResults);
+        };
 
-                else if(selectedOption == "makeExpDate"){
-                    return search.searchByExpDate();
-                }
 
-                else{
-                    console.log("Select one of the values from the drop down.");
-                }
+    function searchMkBag(){
+
+        
+        var sel = document.getElementById("searchDrop");
+        var dropDownSelected = sel.options[sel.selectedIndex].value;
+        var searchFor = document.getElementById("searchInput").value;
+
+        switch(dropDownSelected){
+            case "makeBrand":
+                console.log("search by makeBrand");
+                return searchByBrand(searchFor);
+                break;
+            case "makeName":
+                console.log("search by makeName");
+                //console.log(search.searchByName);
+                break;
+            case "makeType":
+                console.log("search by makeType");
+                 //console.log (search.searchByMkType);
+                break;
+            case "makeExpDate":
+                console.log("search by makeExpDate");
+                //console.log(search.searchByExpDate);
+                break;
+            default:
+                console.log("Select one of the values from the drop down.");
+                break;
+
+
         }
+
     }
 
 
 
-    var buttonAddMakeup = document.getElementById('addMakeupButton');
+    var buttonAddMakeup = document.getElementById("addMakeupButton");
     buttonAddMakeup.onclick = addToBag;
 
-    var displayMakeupBag = document.getElementById('showMakeupButton');
+    var displayMakeupBag = document.getElementById("showMakeupButton");
     displayMakeupBag.onclick = showBag;
 
-    var searchTheBag = document.getElementById('searchByButton');
-    searchTheBag.onclick = searchTheBag;
+    var searchTheBag = document.getElementById("searchByButton");
+    searchTheBag.onclick = searchMkBag;
 
 
 
@@ -150,14 +169,14 @@
 
     function eraseDiv() {
 
-        var displayField = document.getElementById('displayBag');
-        var feedbackField = document.getElementById('feedbackMakeup');
+        var displayField = document.getElementById("displayBag");
+        var feedbackField = document.getElementById("feedbackMakeup");
 
         /*Reset the display area to an empty square.*/
         displayField.textContent = "";
         feedbackField.textContent = "";
 
-        var form = document.getElementById('makeupForm');
+        var form = document.getElementById("makeupForm");
 
         /*Reset form values.*/
         form.reset();
@@ -168,7 +187,7 @@
 
     }
 
-    var resetButton = document.getElementById('resetButton');
+    var resetButton = document.getElementById("resetButton");
     resetButton.onclick = eraseDiv;
 
 })();
