@@ -6,24 +6,24 @@
 (function(){
 
 
+    /* makeupBag array of contents */
     var makeupBag = [];
 
 
-    function Makeup(brand, mkname, type, expDate){
-
+    /* General makeup object */
+    function Makeup(brand, mkname, mktype, expDate){
         this.brand = brand;
         this.mkname = mkname;
-        this.type = type;
+        this.mktype = mktype;
         this.expDate = expDate;
         this.makeupToString = function(){
-          return "You have "+this.brand + " "+this.mkname+ " in your makeup bag. It has an expiration date of "+this.expDate+". It is a "+this.type+".";
+          return "You have "+this.brand + " "+this.mkname+ " in your makeup bag. It has an expiration date of "+this.expDate+". It is a "+this.mktype+".";
         };
-
     }
+    /* end of General makeup object */
 
 
-    /*adding things to the bag */
-
+    /* Adding things to the bag */
     function addToBag(){
 
         var inputBrand = document.getElementById('mkBrand').value;
@@ -49,27 +49,33 @@
 
         }
 
-
         document.getElementById('mkBrand').value = "";
         document.getElementById('mkName').value = "";
         document.getElementById('mkType').value = "";
         document.getElementById('mkExpDate').value = "";
 
     }
+    /* end of Adding things to the bag */
 
 
     /* display what is in the bag */
-
     function showBag (){
       for(var i = 0; i < makeupBag.length; i++){
           document.getElementById('displayBag').innerHTML += makeupBag[i].brand + " " +makeupBag[i].mkname +"<br>";
       }
-  }
+    }
+    /* end of display what is in the bag */
+
+
+    /* search the bag/array of objects */
+    function searchBag(arguments){
+
+    }
+    /* search the bag/array of objects */
 
 
     var buttonAddMakeup = document.getElementById('addMakeupButton');
     buttonAddMakeup.onclick = addToBag;
-
 
     var displayMakeupBag = document.getElementById('showMakeupButton');
     displayMakeupBag.onclick = showBag;
@@ -79,13 +85,12 @@
 
     function eraseDiv() {
 
-
         var displayField = document.getElementById('displayBag');
         var feedbackField = document.getElementById('feedbackMakeup');
+
         /*Reset the display area to an empty square.*/
         displayField.textContent = "";
         feedbackField.textContent = "";
-
 
         var form = document.getElementById('makeupForm');
 
@@ -97,8 +102,6 @@
         displayField.style.height = "400px";
 
     }
-
-
 
     var resetButton = document.getElementById('resetButton');
     resetButton.onclick = eraseDiv;
