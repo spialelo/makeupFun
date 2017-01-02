@@ -68,11 +68,11 @@
 
 
     /* search the bag/array of objects */
-    function searchBag(arguments){
-        this.searchByBrand = function(){
+    function search(){
+        this.searchByBrand = function(arguments){
               for(var i = 0; i < makeupBag.length; i++){
 
-                if (this.brand == makeupBag[i].brand){
+                if (arguments == makeupBag[i].brand){
                     document.getElementById('displayBag').innerHTML += makeupBag[i] +"<br>";
                 }
 
@@ -87,11 +87,63 @@
     /* search the bag/array of objects */
 
 
+    function searchTheBag(){
+
+        var dropDown = document.getElementsByTagName("option");
+
+        for (var i=0; i<dropDown.length; i++){
+
+                var selectedOption = dropDown[i].getAttribute("selected").text;
+
+                if(selectedOption == "makeBrand"){
+                return search.searchByBrand();
+                }
+
+                else if (selectedOption == "makeName"){
+                return search.searchByName();
+                }
+
+                else if(selectedOption == "makeType"){
+                    return search.searchByMkType();
+                }
+
+                else if(selectedOption == "makeExpDate"){
+                    return search.searchByExpDate();
+                }
+
+                else{
+                    console.log("Select one of the values from the drop down.");
+                }
+        }
+    }
+
+
+
     var buttonAddMakeup = document.getElementById('addMakeupButton');
     buttonAddMakeup.onclick = addToBag;
 
     var displayMakeupBag = document.getElementById('showMakeupButton');
     displayMakeupBag.onclick = showBag;
+
+    var searchTheBag = document.getElementById('searchByButton');
+    searchTheBag.onclick = searchTheBag;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*starting all over */
