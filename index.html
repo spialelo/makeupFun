@@ -50,6 +50,15 @@
             float: left;
         }
 
+        #searchDrop{
+            float: left;
+            margin-top: 20px;
+        }
+        
+        #searchByButton{
+            float: left;
+        }
+
         #displayBag{
             float: left;
             clear: both;
@@ -115,7 +124,17 @@
         <br>
 
         <button id="showMakeupButton" type="button" value="Show Makeup">Show Makeup</button>
-
+        <br>
+        <br>
+        <select name="searchMk" id="searchDrop">
+            <option value="">---Select One---</option>
+            <option value="">Brand</option>
+            <option value="">Name</option>
+            <option value="">Type</option>
+            <option value="">Expiration Date</option>
+        </select>
+         <label>Search for:</label> <input type="text" value=""  id="mkBrand" placeholder="Search"/><br>
+        <button id="searchByButton" type="button" value="Search">Search</button>
     </section>
 
 

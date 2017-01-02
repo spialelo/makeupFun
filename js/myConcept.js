@@ -69,7 +69,20 @@
 
     /* search the bag/array of objects */
     function searchBag(arguments){
+        this.searchByBrand = function(){
+              for(var i = 0; i < makeupBag.length; i++){
 
+                if (this.brand == makeupBag[i].brand){
+                    document.getElementById('displayBag').innerHTML += makeupBag[i] +"<br>";
+                }
+
+          
+      
+      }
+        };
+        this.searchByName = function(){};
+        this.searchByMkType = function(){};
+        this.searchByExpDate = function(){};
     }
     /* search the bag/array of objects */
 
