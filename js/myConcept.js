@@ -63,57 +63,41 @@
 
 
     /* search the bag/array of objects */
-    function search(searchMatch){
-         this.searchMatch = searchMatch;
-        /*this.searchByName = function(){};
-        this.searchByMkType = function(){};
-        this.searchByExpDate = function(){};*/
-    }
-    /* search the bag/array of objects */
-
-    /*search.prototype.searchByBrand = function(searchMatch){
-
+    function searchAll (matchSearch){
+        this.searchMatch = matchSearch;
+        this.searchByBrand = function(){
             var searchResults = " ";
-
-              for(var j = 0; j < makeupBag.length; j++){
-
-                if (this.searchMatch == makeupBag[j].brand){
-                    searchResults += makeupBag[j] +"<br>"
+            for(var j = 0; j < makeupBag.length; j++){
+                    if (this.searchMatch == makeupBag[j].brand){
+                        searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
+                    }
                 }
 
-      }
             document.getElementById("displayBag").innerHTML = searchResults;
-            console.log(searchResults);
-        };*/
-
-
-    function searchByBrand (searchMatch){
-            this.searchMatch = searchMatch;
-            var searchResults = " ";
-
-              for(var j = 0; j < makeupBag.length; j++){
-
-                if (this.searchMatch == makeupBag[j].brand){
-                    searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
-                }
-
-      }
-            document.getElementById("displayBag").innerHTML = searchResults;
-            console.log(searchResults);
+            console.log("searching by brand for "+ this.searchMatch);
+            console.log(searchResults);  
         };
+        this.searchByName = function(){
+            console.log("searching by name for "+ this.searchMatch);
+        };
+        this.searchByType = function(){
+        console.log("searching by type for "+ this.searchMatch);
+        };
+        this.searchByExpDate = function(){
+            console.log("searching by expiration date for "+ this.searchMatch);
+        };
+    }
+    /* search the bag/array of objects - further plans to make the search more robust, case insensitive, split string at the space to pull in more results when searching by name, etc*/
 
-
-    function searchMkBag(){
-
-        
+    function searchMkBag(){        
         var sel = document.getElementById("searchDrop");
         var dropDownSelected = sel.options[sel.selectedIndex].value;
         var searchFor = document.getElementById("searchInput").value;
+        var brandSearch = new searchAll(searchFor);
 
         switch(dropDownSelected){
             case "makeBrand":
-                console.log("search by makeBrand");
-                return searchByBrand(searchFor);
+                return brandSearch.searchByBrand();
                 break;
             case "makeName":
                 console.log("search by makeName");
