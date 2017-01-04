@@ -19,14 +19,23 @@
     }
     /* end of General makeup object */
 
+    function toInitCap(str)
+    {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
+
+
 
     /* Adding things to the bag */
     function addToBag(){
 
-        var inputBrand = document.getElementById("mkBrand").value;
-        var inputName = document.getElementById("mkName").value;
-        var inputType = document.getElementById("mkType").value;
+        var inputBrand = toInitCap(document.getElementById("mkBrand").value);
+        var inputName = toInitCap(document.getElementById("mkName").value);
+        var inputType = toInitCap(document.getElementById("mkType").value);
         var inputExpDate = document.getElementById("mkExpDate").value;
+
+
+        /*conver string entered for the date, into a date object and find expiration dates of objects by calculation*/
 
 
         if(inputBrand != "" && inputName != "" && inputType != "" && inputExpDate != "") {
@@ -34,7 +43,6 @@
             var product_1 = new Makeup(inputBrand,inputName,inputType,inputExpDate);
             makeupBag.push(product_1);
             document.getElementById("feedbackMakeup").textContent = makeupBag.length + " item(s) in your makeup bag.";
-
 
         }
 
@@ -78,13 +86,40 @@
             console.log(searchResults);  
         };
         this.searchByName = function(){
+            var searchResults = " ";
+            for(var j = 0; j < makeupBag.length; j++){
+                    if (this.searchMatch == makeupBag[j].mkname){
+                        searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
+                    }
+                }
+
+            document.getElementById("displayBag").innerHTML = searchResults;
             console.log("searching by name for "+ this.searchMatch);
+            console.log(searchResults);
         };
         this.searchByType = function(){
-        console.log("searching by type for "+ this.searchMatch);
+            var searchResults = " ";
+            for(var j = 0; j < makeupBag.length; j++){
+                    if (this.searchMatch == makeupBag[j].mktype){
+                        searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
+                    }
+                }
+
+            document.getElementById("displayBag").innerHTML = searchResults;
+            console.log("searching by type for "+ this.searchMatch);
+            console.log(searchResults);
         };
         this.searchByExpDate = function(){
+            var searchResults = " ";
+            for(var j = 0; j < makeupBag.length; j++){
+                    if (this.searchMatch == makeupBag[j].expDate){
+                        searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
+                    }
+                }
+
+            document.getElementById("displayBag").innerHTML = searchResults;
             console.log("searching by expiration date for "+ this.searchMatch);
+            console.log(searchResults);
         };
     }
     /* search the bag/array of objects - further plans to make the search more robust, case insensitive, split string at the space to pull in more results when searching by name, etc*/
@@ -100,16 +135,13 @@
                 return brandSearch.searchByBrand();
                 break;
             case "makeName":
-                console.log("search by makeName");
-                //console.log(search.searchByName);
+                return brandSearch.searchByName();
                 break;
             case "makeType":
-                console.log("search by makeType");
-                 //console.log (search.searchByMkType);
+                return brandSearch.searchByType();
                 break;
             case "makeExpDate":
-                console.log("search by makeExpDate");
-                //console.log(search.searchByExpDate);
+                return brandSearch.searchByExpDate();
                 break;
             default:
                 console.log("Select one of the values from the drop down.");
