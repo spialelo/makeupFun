@@ -86,9 +86,15 @@
             console.log(searchResults);  
         };
         this.searchByName = function(){
+            var regPattern = this.searchMatch;
+            var regex = new RegExp(regPattern, "gi");
+
             var searchResults = " ";
+            searchResults += "Matches based on search criteria entered "+ this.searchMatch+"&hellip;";
             for(var j = 0; j < makeupBag.length; j++){
-                    if (this.searchMatch == makeupBag[j].mkname){
+                    var testAgainst = makeupBag[j].mkname;
+                    if (regex.test(testAgainst) == true){
+                        console.log(true);
                         searchResults += "You have "+makeupBag[j].brand + " "+makeupBag[j].mkname+ " in your makeup bag. It has an expiration date of "+makeupBag[j].expDate+". It is a "+makeupBag[j].mktype+".<br>";
                     }
                 }
